@@ -23,6 +23,22 @@
   </head>
 
   <body>
+    <header>
+      <%= link_to "Chirp", root_path %>
+      <nav>
+        <% if authenticated? %>
+          <%= Current.user.name %>さん
+          <%= button_to "ログアウト", session_path, method: :delete %>
+        <% else %>
+          <%= link_to "ログイン", new_session_path %>
+          <%= link_to "ユーザー登録", new_registration_path %>
+        <% end %>
+      </nav>
+    </header>
+
+    <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+    <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
     <%= yield %>
   </body>
 </html>
