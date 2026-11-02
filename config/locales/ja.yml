@@ -6,3 +6,5 @@ ja:
         email_address: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
+      post:
+        body: 本文
