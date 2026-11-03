@@ -1,24 +1,39 @@
-# README
+# Chirp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8.1 の学習用に作っている、小さな Twitter 風アプリです。
 
-Things you may want to cover:
+## できること
 
-* Ruby version
+- ユーザー登録、ログイン、ログアウト
+- パスワードの再設定（メールで案内）
+- 投稿の一覧表示（新しい順。ログインなしでも閲覧可）
+- 140 文字以内の投稿と、自分の投稿の削除
+- 投稿へのいいねと、その取り消し
 
-* System dependencies
+## 技術構成
 
-* Configuration
+- Ruby 3.4.10
+- Rails 8.1
+- SQLite
+- RSpec、FactoryBot（テスト）
 
-* Database creation
+## セットアップ
 
-* Database initialization
+```sh
+bin/setup
+```
 
-* How to run the test suite
+依存 gem のインストールとデータベースの準備が行われ、そのまま開発サーバーが起動します。
+起動後は http://localhost:3000 を開いてください。
 
-* Services (job queues, cache servers, search engines, etc.)
+2 回目以降は `bin/dev` でサーバーを起動できます。
 
-* Deployment instructions
+## テスト
 
-* ...
+```sh
+bundle exec rspec
+```
+
+## 開発の進め方
+
+テストを先に書く TDD で開発しています。詳しいルールは [CLAUDE.md](CLAUDE.md) を参照してください。
