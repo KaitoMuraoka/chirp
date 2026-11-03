@@ -1,0 +1,7 @@
+<article>
+  <strong><%= post.user.name %></strong>
+  <p><%= post.body %></p>
+  <% if authenticated? && post.user == Current.user %>
+    <%= button_to "削除", post, method: :delete, form: { onsubmit: "return confirm('この投稿を削除しますか？')" } %>
+  <% end %>
+</article>

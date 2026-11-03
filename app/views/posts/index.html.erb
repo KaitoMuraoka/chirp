@@ -1,1 +1,18 @@
 <h1>Chirp</h1>
+
+<% if authenticated? %>
+  <% if @post.errors.any? %>
+    <ul style="color:red">
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @post do |form| %>
+    <div><%= form.label :body %><br><%= form.text_area :body %></div>
+    <%= form.submit "投稿する" %>
+  <% end %>
+<% end %>
+
+<%= render @posts %>
