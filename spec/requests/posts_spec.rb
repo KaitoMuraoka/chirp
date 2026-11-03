@@ -100,6 +100,12 @@ RSpec.describe "Posts", type: :request do
         expect(Post.exists?(alice_post.id)).to be(false)
       end
 
+      it "いいねが付いていても削除できること" do
+        create(:like, user: bob, post: alice_post)
+        expect { delete post_path(alice_post) }.to change(Post, :count).by(-1)
+        expect(Post.exists?(alice_post.id)).to be(false)
+      end
+
       it "トップページに戻ること" do
         delete post_path(alice_post)
         expect(response).to redirect_to(root_path)

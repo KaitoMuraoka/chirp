@@ -1,7 +1,14 @@
 <article>
   <strong><%= post.user.name %></strong>
   <p><%= post.body %></p>
-  <% if authenticated? && post.user == Current.user %>
+  <% if Current.user.nil? %>
+    <span>♡ <%= post.likes.size %></span>
+  <% elsif post.liked_by?(Current.user) %>
+    <%= button_to "♥ #{post.likes.size}", post_like_path(post), method: :delete %>
+  <% else %>
+    <%= button_to "♡ #{post.likes.size}", post_like_path(post) %>
+  <% end %>
+  <% if post.user == Current.user %>
     <%= button_to "削除", post, method: :delete, form: { onsubmit: "return confirm('この投稿を削除しますか？')" } %>
   <% end %>
 </article>

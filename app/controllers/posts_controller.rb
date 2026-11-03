@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = timeline_posts
+    @posts = Post.timeline
   end
 
   def create
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to root_path, notice: "投稿しました"
     else
-      @posts = timeline_posts
+      @posts = Post.timeline
       render :index, status: :unprocessable_content
     end
   end
@@ -24,9 +24,5 @@ class PostsController < ApplicationController
   private
     def post_params
       params.expect(post: [ :body ])
-    end
-
-    def timeline_posts
-      Post.includes(:user).order(created_at: :desc)
     end
 end

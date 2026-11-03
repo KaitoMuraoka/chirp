@@ -26,4 +26,28 @@ RSpec.describe Post, type: :model do
       expect(post.errors[:user]).to be_present
     end
   end
+
+  describe "#liked_by?" do
+    let(:post) { create(:post) }
+    let(:user) { create(:user) }
+
+    it "そのユーザーがいいねしていれば true を返すこと" do
+      create(:like, user: user, post: post)
+      expect(post.liked_by?(user)).to be(true)
+    end
+
+    it "そのユーザーがいいねしていなければ false を返すこと" do
+      expect(post.liked_by?(user)).to be(false)
+    end
+
+    it "別のユーザーだけがいいねしていれば false を返すこと" do
+      create(:like, post: post)
+      expect(post.liked_by?(user)).to be(false)
+    end
+
+    it "別の投稿にいいねしていても false を返すこと" do
+      create(:like, user: user)
+      expect(post.liked_by?(user)).to be(false)
+    end
+  end
 end
