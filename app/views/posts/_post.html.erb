@@ -2,13 +2,13 @@
   <strong><%= post.user.name %></strong>
   <p><%= post.body %></p>
   <% if Current.user.nil? %>
-    <span>♡ <%= post.likes.size %></span>
+    <span class="like">♡ <%= post.likes.size %></span>
   <% elsif post.liked_by?(Current.user) %>
-    <%= button_to "♥ #{post.likes.size}", post_like_path(post), method: :delete %>
+    <%= button_to "♥ #{post.likes.size}", post_like_path(post), method: :delete, class: "like liked" %>
   <% else %>
-    <%= button_to "♡ #{post.likes.size}", post_like_path(post) %>
+    <%= button_to "♡ #{post.likes.size}", post_like_path(post), class: "like" %>
   <% end %>
   <% if post.user == Current.user %>
-    <%= button_to "削除", post, method: :delete, form: { onsubmit: "return confirm('この投稿を削除しますか？')" } %>
+    <%= button_to "削除", post, method: :delete, class: "danger", form: { onsubmit: "return confirm('この投稿を削除しますか？')" } %>
   <% end %>
 </article>

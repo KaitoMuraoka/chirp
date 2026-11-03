@@ -1,8 +1,8 @@
-<h1>Chirp</h1>
+<h1>タイムライン</h1>
 
 <% if authenticated? %>
   <% if @post.errors.any? %>
-    <ul style="color:red">
+    <ul class="errors">
       <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -10,7 +10,7 @@
   <% end %>
 
   <%= form_with model: @post do |form| %>
-    <div><%= form.label :body %><br><%= form.text_area :body %></div>
+    <div><%= form.label :body %><%= form.text_area :body %></div>
     <%= form.submit "投稿する" %>
   <% end %>
 <% end %>
